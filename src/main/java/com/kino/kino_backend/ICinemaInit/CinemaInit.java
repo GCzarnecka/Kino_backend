@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -57,7 +58,7 @@ public class CinemaInit implements ICinemaInit{
 
     @Override
     public void initCategories() {
-        Stream.of("Action", "Drama", "Comedy", "Fiction", "Crime").forEach(category -> {
+        Stream.of("Action", "Drama", "Comedy", "Fiction", "Crime", "Fantasy").forEach(category -> {
             Category categorie = new Category();
             categorie.setName(category);
             categorie.setDescription("This is a description for " + category);
@@ -76,7 +77,7 @@ public class CinemaInit implements ICinemaInit{
                     Seat seat = new Seat();
                     seat.setSectorNumber(i);
                     seat.setSeatNumber(j);
-//                    seat.setCinemaRoom(cinemaRoom);
+                    seat.setCinemaRoom(cinemaRoom);
                     seatRepository.save(seat);
                     seats.add(seat);
                 }
@@ -94,38 +95,137 @@ public class CinemaInit implements ICinemaInit{
 
     }
 
-    @Override
-    public void initMessageComplaints() {
-
-
-        messageComplaintRepository.save(new MessageComplaint(){});
-    }
+//    @Override
+//    public void initMessageComplaints() {
+//
+//    }
 
     @Override
     public void initMovies() {
-        movieRepository.save(new Movie(){});
+        movieRepository.save(new Movie(
+                "John Wick",
+                (Category) categorieRepository.findByName("Action"),
+                2014,
+                16,
+                120,
+                (Author) authorRepository.findByName("Author 1"),
+                "https://upload.wikimedia.org/wikipedia/en/9/98/John_Wick_TeaserPoster.jpg",
+                "John Wick is a 2014 American neo-noir action-thriller film directed by Chad Stahelski, " +
+                        "in his directorial debut, and written by Derek Kolstad. It stars Keanu Reeves, " +
+                        "Michael Nyqvist, Alfie Allen, Adrianne Palicki, Bridget Moynahan, Dean Winters, Ian McShane," +
+                        " John Leguizamo, and Willem Dafoe. It is the first installment in the John Wick film series."
+
+        ));
+
+        movieRepository.save(new Movie(
+                "Shrek",
+                (Category) categorieRepository.findByName("Comedy"),
+                2001,
+                7,
+                90,
+                (Author) authorRepository.findByName("Author 2"),
+                "https://upload.wikimedia.org/wikipedia/en/3/39/Shrek.jpg",
+                "Shrek is a 2001 American computer-animated comedy film " +
+                        "loosely based on the 1990 fairy tale picture book of the same " +
+                        "name by William Steig. Directed by Andrew Adamson and Vicky Jenson " +
+                        "in their directorial debuts, it stars Mike Myers, Eddie Murphy," +
+                        " Cameron Diaz and John Lithgow as the voices of the lead characters. " +
+                        "The film parodies other films adapted from fairy tale storylines, " +
+                        "primarily aimed at animated Disney films. In the story, " +
+                        "an ogre called Shrek (Myers) finds his swamp overrun by" +
+                        " fairy tale creatures who have been banished by the corrupt " +
+                        "Lord Farquaad (Lithgow) aspiring to be king. Shrek makes a " +
+                        "deal with Farquaad to regain control of his swamp in return" +
+                        " for rescuing Princess Fiona (Diaz), whom he intends to marry. " +
+                        "With the help of Donkey (Murphy), Shrek embarks on his quest but " +
+                        "soon falls in love with the princess, who is hiding a secret that" +
+                        " will change his life forever."
+        ));
+
+        movieRepository.save(new Movie(
+                "The Shawshank Redemption",
+                (Category) categorieRepository.findByName("Drama"),
+                1994,
+                16,
+                142,
+                (Author) authorRepository.findByName("Author 3"),
+                "https://upload.wikimedia.org/wikipedia/en/8/81/ShawshankRedemptionMoviePoster.jpg",
+                "The Shawshank Redemption is a 1994 American drama film written and directed by Frank Darabont," +
+                        " based on the 1982 Stephen King novella Rita Hayworth and Shawshank Redemption. It tells the story" +
+                        " of banker Andy Dufresne (Tim Robbins), who is sentenced to life in Shawshank State Penitentiary for" +
+                        " the murders of his wife and her lover, despite his claims of innocence. Over the following two decades," +
+                        " he befriends a fellow prisoner, contraband smuggler Ellis \"Red\" Redding (Morgan Freeman), and becomes" +
+                        " instrumental in a money-laundering operation led by the prison warden Samuel Norton (Bob Gunton). " +
+                        "William Sadler, Clancy Brown, Gil Bellows, and James Whitmore appear in supporting roles."
+        ));
+
+        movieRepository.save(new Movie(
+                "The Godfather",
+                (Category) categorieRepository.findByName("Crime"),
+                1972,
+                16,
+                175,
+                (Author) authorRepository.findByName("Author 4"),
+                "https://upload.wikimedia.org/wikipedia/en/1/1c/Godfather_ver1.jpg",
+                "The Godfather is a 1972 American crime film directed by Francis Ford Coppola, " +
+                        "who co-wrote the screenplay with Mario Puzo, based on Puzo's best-selling 1969 novel of the same name." +
+                        " The film stars Marlon Brando, Al Pacino, James Caan, Richard Castellano, Robert Duvall, Sterling Hayden," +
+                        " John Marley, Richard Conte, and Diane Keaton. It is the first installment in The Godfather trilogy." +
+                        " The story, spanning from 1945 to 1955, chronicles the Corleone family under patriarch Vito Corleone (Brando)," +
+                        " focusing on the transformation of one of his sons, Michael Corleone (Pacino), from reluctant family outsider" +
+                        " to ruthless mafia boss."
+        ));
+
+        movieRepository.save(new Movie(
+                "The Dark Knight",
+                (Category) categorieRepository.findByName("Action"),
+                2008,
+                16,
+                152,
+                (Author) authorRepository.findByName("Author 5"),
+                "https://upload.wikimedia.org/wikipedia/en/8/8a/Dark_Knight.jpg",
+                "The Dark Knight is a 2008 superhero film directed, produced, and co-written by Christopher Nolan." +
+                        " Based on the DC Comics character Batman, the film is the second installment of Nolan's The Dark Knight Trilogy" +
+                        " and a sequel to 2005's Batman Begins, starring Christian Bale and supported by Michael Caine, Heath Ledger," +
+                        " Gary Oldman, Aaron Eckhart, Maggie Gyllenhaal, and Morgan Freeman. In the film, Bruce Wayne / Batman (Bale)," +
+                        " Police Lieutenant James Gordon (Oldman) and District Attorney Harvey Dent (Eckhart) form an alliance to dismantle" +
+                        " organized crime in Gotham City, but are menaced by an anarchistic mastermind known as the Joker (Ledger)," +
+                        " who seeks to undermine Batman's influence and turn the city to chaos."
+        ));
+
+        movieRepository.save(new Movie(
+                "The Lord of the Rings: The Return of the King",
+                (Category) categorieRepository.findByName("Fantasy"),
+                2003,
+                12,
+                201,
+                (Author) authorRepository.findByName("Author 6"),
+                "https://upload.wikimedia.org/wikipedia/en/9/9d/Lord_of_the_Rings_-_The_Return_of_the_King.jpg",
+                "The Lord of the Rings: The Return of the King is a 2003 epic fantasy adventure film directed by Peter Jackson," +
+                        " based on the third volume of J. R. R. Tolkien's The Lord of the Rings. The film is the final instalment in the" +
+                        " Lord of the Rings trilogy and was produced by Barrie M. Osborne, Jackson and Fran Walsh, and written by Walsh," +
+                        " Philippa Boyens and Jackson. Continuing the plot of The Two Towers, Frodo, Sam and Gollum are making their final" +
+                        " way toward Mount Doom in Mordor in order to destroy the One Ring, unaware of Gollum's true intentions, while" +
+                        " Gandalf, Aragorn, Legolas, Gimli and the rest are joining forces together against Sauron and his legions in" +
+                        " Minas Tirith."
+        ));
 
     }
 
     @Override
     public void initReservations() {
-        reservationRepository.save(new Reservation(){});
+//        reservationRepository.save(new Reservation(){});
     }
 
     @Override
     public void initScreenings() {
-        List<Screening> screenings =  new ArrayList<>();
-        for(int i =0;i<10;i++){
+        for(int i =0;i<5;i++){
             Screening screening = new Screening();
-            screening.setMovie(movieRepository.findById(1L).get());
-            screening.setCinemaRoom(cinemaRoomRepository.findById(1L).get());
-            screening.setStartDateTime(LocalDateTime.parse("2021-06-01 12:00"));
-//            screening.setScreeningTime("12:00");
-            screening.setCinemaRoom(cinemaRoomRepository.findById(1L).get());
-            screening.setMovie(movieRepository.findById(1L).get());
+            screening.setMovie(movieRepository.findByTitle("The Lord of the Rings: The Return of the King"));
+            screening.setCinemaRoom(cinemaRoomRepository.findByName("Room "+i+1));
+            screening.setStartDateTime(LocalDateTime.parse("2020-12-12T12:00:00"));
 
             screeningRepository.save(screening);
-            screenings.add(screening);
         }
     }
 
@@ -137,12 +237,21 @@ public class CinemaInit implements ICinemaInit{
 
     @Override
     public void initUsers() {
-        Stream.of("User 1", "User 2", "User 3", "User 4", "User 5").forEach(user -> {
-            User user1 = new User();
-            user1.setName(user);
-            user1.setSurname("Surname");
-            user1.setAge(20);
-            userRepository.save(user1);
-        });
+        User user1 = new User();
+        user1.setName("Gosia");
+        user1.setSurname("Jakas");
+        user1.setEmail("gosia@mail.pl");
+        user1.setPassword("1234");
+        user1.setAge(18);
+        userRepository.save(user1);
+
+        User user2 = new User();
+        user2.setName("Konrad");
+        user2.setSurname("Jakis");
+        user2.setEmail("konrad@mail.pl");
+        user2.setPassword("1234");
+        user2.setAge(18);
+        user2.setAdmin(true);
+        userRepository.save(user2);
     }
 }

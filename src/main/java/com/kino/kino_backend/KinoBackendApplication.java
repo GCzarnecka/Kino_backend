@@ -8,24 +8,24 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class KinoBackendApplication  {
+public class KinoBackendApplication implements CommandLineRunner {
     @Autowired
     CinemaInit cinemaInit;
 
     public static void main(String[] args) {
         SpringApplication.run(KinoBackendApplication.class, args);
     }
-//    @Override
-//    public void run(String... args) throws Exception {
-//        cinemaInit.initAuthors();
-//        cinemaInit.initCategories();
-//        cinemaInit.initCinemaRooms();
+    @Override
+    public void run(String... args) throws Exception {
+        cinemaInit.initAuthors();
+        cinemaInit.initCategories();
+        cinemaInit.initCinemaRooms();
 //        cinemaInit.initMessageComplaints();
-//        cinemaInit.initMovies();
-//        cinemaInit.initReservations();
-//        cinemaInit.initScreenings();
-//        cinemaInit.initSeats();
-//        cinemaInit.initUsers();
-//    }
+        cinemaInit.initMovies();
+        cinemaInit.initReservations();
+        cinemaInit.initScreenings();
+        cinemaInit.initSeats();
+        cinemaInit.initUsers();
+    }
 
 }

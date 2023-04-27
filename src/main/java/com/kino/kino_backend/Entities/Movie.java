@@ -22,23 +22,38 @@ public class Movie {
     private Category category;
 
     @Temporal(TemporalType.DATE)
-    private Date productionDate;
+    private int productionDate;
 
     private int ageRestriction;
 
     private int duration;
 
+    @Column(length = 5000)
+    private String description;
+
+
     @ManyToOne
     private Author author;
 
-    @OneToMany//(mappedBy = "screenings")
-    private List<Screening> screening;
-//
-//    @ManyToMany//(mappedBy = "reservations")
-//    private List<Reservation> reservations;
+    private String poster;
+    public Movie() {
+    }
+    public Movie(String title, Category category, int productionDate,
+                 int ageRestriction, int duration, Author author, String poster,
+                 String description
+    ) {
+        this.title = title;
+        this.category = category;
+        this.productionDate = productionDate;
+        this.ageRestriction = ageRestriction;
+        this.duration = duration;
+        this.author = author;
+        this.poster = poster;
+        this.description = description;
+    }
 
-    @OneToOne
-    private CinemaRoom cinemaRoom;
+//    public Movie(String s, String s1, String url, int i, int i1, int i2) {
+//    }
 
     public int getId() {
         return id;
@@ -64,11 +79,11 @@ public class Movie {
         this.category = category;
     }
 
-    public Date getProductionDate() {
+    public int getProductionDate() {
         return productionDate;
     }
 
-    public void setProductionDate(Date productionDate) {
+    public void setProductionDate(int productionDate) {
         this.productionDate = productionDate;
     }
 
@@ -94,22 +109,6 @@ public class Movie {
 
     public void setAuthor(Author author) {
         this.author = author;
-    }
-
-    public List<Screening> getScreening() {
-        return screening;
-    }
-
-    public void setScreening(List<Screening> screening) {
-        this.screening = screening;
-    }
-
-    public CinemaRoom getCinemaRoom() {
-        return cinemaRoom;
-    }
-
-    public void setCinemaRoom(CinemaRoom cinemaRoom) {
-        this.cinemaRoom = cinemaRoom;
     }
 }
 

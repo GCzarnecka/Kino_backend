@@ -8,6 +8,7 @@ import java.util.List;
 
 @Repository
 public interface AuthorRepository extends JpaRepository<Author, Long> {
+    Object findByName(String s);
 //    Author findByNameAndSurname(String name, String surname);
 //    List<Author> findByAgeGreaterThan(int age);
 }

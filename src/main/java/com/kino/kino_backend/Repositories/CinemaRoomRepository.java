@@ -9,6 +9,7 @@ import java.util.Optional;
 
 @Repository
 public interface CinemaRoomRepository extends JpaRepository<CinemaRoom, Long> {
+    CinemaRoom findByName(String s);
 
 //    List<CinemaRoom> findByCapacityGreaterThanEqual(int capacity);
 //

@@ -4,7 +4,7 @@ public interface ICinemaInit {
     void initAuthors();
     void initCategories();
     void initCinemaRooms();
-    void initMessageComplaints();
+//    void initMessageComplaints();
     void initMovies();
     void initReservations();
     void initScreenings();
