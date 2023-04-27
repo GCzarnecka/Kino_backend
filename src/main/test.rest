@@ -1,0 +1,10 @@
+
+POST localhost:8080/api/movies
+content-type: application/json
+
+{
+    "title": "The Godfather"
+}
+
+###
+GET localhost:8080/api/movies
