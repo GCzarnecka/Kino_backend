@@ -33,6 +33,9 @@ public class User {
         @OneToMany//(mappedBy = "movies")
         private List<Reservation> reservations;
 
+        @OneToMany//(mappedBy = "movies")
+        private List<MessageComplaint> messageComplaints;
+
         public int getId() {
                 return id;
         }

@@ -8,3 +8,21 @@ content-type: application/json
 
 ###
 GET localhost:8080/api/movies
+###
+GET localhost:8080/api/screenings
+content-type: application/json
+{
+   "movieId": 1,
+}
+###
+GET localhost:8080/api/movies
+
+
+###
+GET localhost:8080/api/movies/1
+
+###
+GET localhost:8080/api/screenings?movieId=6
+
+###
+GET localhost:8080/api/screenings

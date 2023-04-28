@@ -6,7 +6,7 @@ import lombok.Data;
 import java.util.List;
 
 @Entity
-@Table(name = "cathegories")
+@Table(name = "categories")
 @Data
 public class Category {
 

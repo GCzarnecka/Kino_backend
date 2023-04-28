@@ -21,8 +21,8 @@ public class CinemaRoom {
     @OneToMany//(mappedBy = "screenings")
     private List<Screening> screenings;
 
-    @OneToOne//(mappedBy = "movies")
-    private Movie movie;
+//    @OneToOne//(mappedBy = "movies")
+//    private Movie movie;
 //
 
        private int rowsNumber;
