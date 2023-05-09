@@ -18,8 +18,8 @@ public class CinemaRoom {
     private List<Seat> seats;
 
 
-    @OneToMany//(mappedBy = "screenings")
-    private List<Screening> screenings;
+//    @OneToMany//(mappedBy = "screenings")
+//    private List<Screening> screenings;
 
 //    @OneToOne//(mappedBy = "movies")
 //    private Movie movie;

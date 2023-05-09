@@ -6,11 +6,17 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Month;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Stream;
+
+import static com.fasterxml.jackson.databind.type.LogicalType.DateTime;
 
 @Service
 @Transactional
@@ -124,7 +130,7 @@ public class CinemaInit implements ICinemaInit{
                 7,
                 90,
                 (Author) authorRepository.findByName("Author 2"),
-                "https://upload.wikimedia.org/wikipedia/en/3/39/Shrek.jpg",
+                "https://a.allegroimg.com/original/1173c0/c7054d4a4416a3c75f92f9f9043f/SHREK-FOREVER-DVD",
                 "Shrek is a 2001 American computer-animated comedy film " +
                         "loosely based on the 1990 fairy tale picture book of the same " +
                         "name by William Steig. Directed by Andrew Adamson and Vicky Jenson " +
@@ -183,7 +189,7 @@ public class CinemaInit implements ICinemaInit{
                 16,
                 152,
                 (Author) authorRepository.findByName("Author 5"),
-                "https://upload.wikimedia.org/wikipedia/en/8/8a/Dark_Knight.jpg",
+                "https://m.media-amazon.com/images/I/91KkWf50SoL._AC_UF1000,1000_QL80_.jpg",
                 "The Dark Knight is a 2008 superhero film directed, produced, and co-written by Christopher Nolan." +
                         " Based on the DC Comics character Batman, the film is the second installment of Nolan's The Dark Knight Trilogy" +
                         " and a sequel to 2005's Batman Begins, starring Christian Bale and supported by Michael Caine, Heath Ledger," +
@@ -200,7 +206,7 @@ public class CinemaInit implements ICinemaInit{
                 12,
                 201,
                 (Author) authorRepository.findByName("Author 6"),
-                "https://upload.wikimedia.org/wikipedia/en/9/9d/Lord_of_the_Rings_-_The_Return_of_the_King.jpg",
+                "https://images.moviesanywhere.com/45bc0ec075bfc0b4d8f184a7cc5bf993/876ed805-83b1-4387-b0d0-62d08c36536d.jpg",
                 "The Lord of the Rings: The Return of the King is a 2003 epic fantasy adventure film directed by Peter Jackson," +
                         " based on the third volume of J. R. R. Tolkien's The Lord of the Rings. The film is the final instalment in the" +
                         " Lord of the Rings trilogy and was produced by Barrie M. Osborne, Jackson and Fran Walsh, and written by Walsh," +
@@ -217,16 +223,32 @@ public class CinemaInit implements ICinemaInit{
 //        reservationRepository.save(new Reservation(){});
     }
 
+    private static LocalDateTime getRandomLocalDateTime(){
+        long minDay = LocalDateTime.of(2020, Month.DECEMBER, 1, 0, 0).toEpochSecond(ZoneOffset.UTC);
+        long maxDay = LocalDateTime.of(2020, Month.DECEMBER, 31, 23, 59).toEpochSecond(ZoneOffset.UTC);
+        long randomDay = ThreadLocalRandom.current().nextLong(minDay, maxDay);
+        return LocalDateTime.ofEpochSecond(randomDay, 0, ZoneOffset.UTC);
+    }
+
     @Override
     public void initScreenings() {
-        for(int i =0;i<5;i++){
-            Screening screening = new Screening();
-            screening.setMovie(movieRepository.findByTitle("The Lord of the Rings: The Return of the King"));
-            screening.setCinemaRoom(cinemaRoomRepository.findByName("Room "+i+1));
-            screening.setStartDateTime(LocalDateTime.parse("2020-12-12T12:00:00"));
 
-            screeningRepository.save(screening);
+        CinemaRoom cr = cinemaRoomRepository.findByName("Room 1");
+        for(Movie m : movieRepository.findAll()){
+                Screening screening = new Screening();
+                screening.setMovie(m);
+//                screening.setCinemaRoom(cr);
+                screening.setStartDateTime(getRandomLocalDateTime());
+                screeningRepository.save(screening);
         }
+//        for(int i =0;i<5;i++){
+//            Screening screening = new Screening();
+//            screening.setMovie(movieRepository.findByTitle("The Lord of the Rings: The Return of the King"));
+//            screening.setCinemaRoom(cinemaRoomRepository.findByName("Room "+i+1));
+//            screening.setStartDateTime(LocalDateTime.parse("2020-12-12T12:00:00"));
+//
+//            screeningRepository.save(screening);
+//        }
     }
 
     @Override

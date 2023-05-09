@@ -18,7 +18,7 @@ public class Screening {
 //    @JoinColumn(name = "movie_id")
     private Movie movie;
 
-    @OneToOne
+    @ManyToOne
     private CinemaRoom cinemaRoom;
 
 //    @Column(name = "screening_time")
