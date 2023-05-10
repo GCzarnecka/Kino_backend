@@ -17,6 +17,8 @@ content-type: application/json
 }
 ###
 GET localhost:8080/api/movies
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0IiwiaWF0IjoxNjgzNzQ3MzU4LCJleHAiOjE2ODM3ODMzNTh9.qve_GU8ZBExGWXb8NcoEdt59CJVcP85tBQkFwZmhcmc
+
 
 
 ###
@@ -50,6 +52,10 @@ POST localhost:8080/api/auth/login
 content-type: application/json
 
 {
-    "email": "r",
+    "email": "t",
     "password": "password"
 }
+
+###
+GET localhost:8080/logged/user
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0IiwiaWF0IjoxNjgzNzQ3MzU4LCJleHAiOjE2ODM3ODMzNTh9.qve_GU8ZBExGWXb8NcoEdt59CJVcP85tBQkFwZmhcmc

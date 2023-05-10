@@ -25,7 +25,13 @@ public class AuthenticationService {
                 .password(passwordEncoder.encode(registerRequest.getPassword()))
                 .role(Role.USER)
                 .build();
-        userRepository.save(user);
+
+        try {
+            userRepository.save(user);
+        }
+        catch (Exception e){
+            return null;
+        }
         var jwt = jwtService.generateToken(user);
         return AuthenticationResponse.builder()
                 .token(jwt)

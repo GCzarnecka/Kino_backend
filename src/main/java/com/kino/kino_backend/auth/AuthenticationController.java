@@ -2,29 +2,36 @@ package com.kino.kino_backend.auth;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/auth")
+//@RequestMapping("/api/auth")
 @RequiredArgsConstructor
 public class AuthenticationController {
 
     private final AuthenticationService authenticationService;
-    @PostMapping("/login")
+    @PostMapping("/api/auth/login")
     public ResponseEntity<AuthenticationResponse> login(
             @RequestBody AuthenticationRequest authenticationRequest
     )
     {
     return ResponseEntity.ok(authenticationService.login(authenticationRequest));
     }
-    @PostMapping("/register")
-    public ResponseEntity<AuthenticationResponse> register(
+    @PostMapping("/api/auth/register")
+    public ResponseEntity<Object> register(
         @RequestBody RegisterRequest registerRequest
     )
     {
-        return ResponseEntity.ok(authenticationService.register(registerRequest));
+        var resp = authenticationService.register(registerRequest);
+        if(resp == null)
+            return ResponseEntity.badRequest().body("User with provided email already exists!");
+        return ResponseEntity.ok(resp);
     }
+
+//    @GetMapping("logged/refreshToken")
+//    public ResponseEntity<Object> refreshToken(){
+//        return
+//    }
+
+
 }

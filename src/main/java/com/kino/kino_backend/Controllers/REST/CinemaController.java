@@ -19,9 +19,6 @@ import java.util.Optional;
 public class CinemaController {
 
     @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
     private MovieRepository movieRepository;
 
     @Autowired
