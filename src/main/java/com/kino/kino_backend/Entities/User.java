@@ -2,15 +2,21 @@ package com.kino.kino_backend.Entities;
 
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.ToString;
+import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Collection;
 import java.util.List;
 
 @Entity
 @Table(name = "users")
 @Data
-public class User {
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class User implements UserDetails {
 
         @Id
         @GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,13 +28,9 @@ public class User {
 
         private String password;
 
-        boolean isAdmin = false;
-
         private String surname;
 
         private int age;
-
-        private String username;
 
         @OneToMany//(mappedBy = "movies")
         private List<Reservation> reservations;
@@ -60,20 +62,24 @@ public class User {
                 this.email = email;
         }
 
+        @Enumerated(EnumType.STRING)
+        private Role role;
+        @Override
+        public Collection<? extends GrantedAuthority> getAuthorities() {
+                return List.of(new SimpleGrantedAuthority(role.name()));
+        }
+        @Override
         public String getPassword() {
                 return password;
         }
 
+        @Override
+        public String getUsername() {
+                return email;
+        }
+
         public void setPassword(String password) {
                 this.password = password;
-        }
-
-        public boolean isAdmin() {
-                return isAdmin;
-        }
-
-        public void setAdmin(boolean admin) {
-                isAdmin = admin;
         }
 
         public String getSurname() {
@@ -92,12 +98,25 @@ public class User {
                 this.age = age;
         }
 
-        public String getUsername() {
-                return username;
+
+        @Override
+        public boolean isAccountNonExpired() {
+                return true;
         }
 
-        public void setUsername(String username) {
-                this.username = username;
+        @Override
+        public boolean isAccountNonLocked() {
+                return true;
+        }
+
+        @Override
+        public boolean isCredentialsNonExpired() {
+                return true;
+        }
+
+        @Override
+        public boolean isEnabled() {
+                return true;
         }
 
         public List<Reservation> getReservations() {

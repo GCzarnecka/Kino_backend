@@ -259,21 +259,21 @@ public class CinemaInit implements ICinemaInit{
 
     @Override
     public void initUsers() {
-        User user1 = new User();
-        user1.setName("Gosia");
-        user1.setSurname("Jakas");
-        user1.setEmail("gosia@mail.pl");
-        user1.setPassword("1234");
-        user1.setAge(18);
-        userRepository.save(user1);
-
-        User user2 = new User();
-        user2.setName("Konrad");
-        user2.setSurname("Jakis");
-        user2.setEmail("konrad@mail.pl");
-        user2.setPassword("1234");
-        user2.setAge(18);
-        user2.setAdmin(true);
-        userRepository.save(user2);
+//        User user1 = new User();
+//        user1.setName("Gosia");
+//        user1.setSurname("Jakas");
+//        user1.setEmail("gosia@mail.pl");
+//        user1.setPassword("1234");
+//        user1.setAge(18);
+//        userRepository.save(user1);
+//
+//        User user2 = new User();
+//        user2.setName("Konrad");
+//        user2.setSurname("Jakis");
+//        user2.setEmail("konrad@mail.pl");
+//        user2.setPassword("1234");
+//        user2.setAge(18);
+//        user2.setAdmin(true);
+//        userRepository.save(user2);
     }
 }

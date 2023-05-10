@@ -8,6 +8,7 @@ content-type: application/json
 
 ###
 GET localhost:8080/api/movies
+
 ###
 GET localhost:8080/api/screenings
 content-type: application/json
@@ -26,3 +27,29 @@ GET localhost:8080/api/screenings?movieId=6
 
 ###
 GET localhost:8080/api/screenings
+
+###
+GET localhost:8080/demo-controller
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlIiwiaWF0IjoxNjgzNzMwOTYzLCJleHAiOjE2ODM3NjY5NjN9.-9n0J6R-IROiysKT3Q4m1dyu_Ofz_87vuG5U0BXm-tk
+
+
+###
+POST localhost:8080/api/auth/register
+content-type: application/json
+
+{
+    "email": "t",
+    "password": "password",
+      "name": "name",
+      "surname": "surname"
+
+}
+
+###
+POST localhost:8080/api/auth/login
+content-type: application/json
+
+{
+    "email": "r",
+    "password": "password"
+}

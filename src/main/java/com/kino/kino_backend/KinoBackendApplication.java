@@ -17,15 +17,15 @@ public class KinoBackendApplication implements CommandLineRunner {
     }
     @Override
     public void run(String... args) throws Exception {
-        cinemaInit.initAuthors();
-        cinemaInit.initCategories();
-        cinemaInit.initCinemaRooms();
-//        cinemaInit.initMessageComplaints();
-        cinemaInit.initMovies();
-        cinemaInit.initReservations();
-        cinemaInit.initScreenings();
-        cinemaInit.initSeats();
-        cinemaInit.initUsers();
+//        cinemaInit.initAuthors();
+//        cinemaInit.initCategories();
+//        cinemaInit.initCinemaRooms();
+////        cinemaInit.initMessageComplaints();
+//        cinemaInit.initMovies();
+//        cinemaInit.initReservations();
+//        cinemaInit.initScreenings();
+//        cinemaInit.initSeats();
+//        cinemaInit.initUsers();
     }
 
 }
