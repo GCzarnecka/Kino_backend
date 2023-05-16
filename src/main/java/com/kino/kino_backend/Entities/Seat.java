@@ -14,22 +14,24 @@ public class Seat {
     private int id;
 
     private int sectorNumber;
-//
+
     private int seatNumber;
 
     private boolean isTaken;
 
-    @ManyToOne
-    private CinemaRoom cinemaRoom;
-
     public Seat(int i, int i1, CinemaRoom cinemaRoom) {
         this.sectorNumber = i;
         this.seatNumber = i1;
-//        this.cinemaRoom = cinemaRoom;
     }
 
     public Seat() {
 
+    }
+
+    public Seat(int i, int j, boolean b) {
+        this.sectorNumber = i;
+        this.seatNumber = j;
+        this.isTaken = b;
     }
 
     public int getId() {

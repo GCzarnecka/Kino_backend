@@ -40,7 +40,7 @@ POST localhost:8080/api/auth/register
 content-type: application/json
 
 {
-    "email": "t",
+    "email": "pp",
     "password": "password",
       "name": "name",
       "surname": "surname"
@@ -52,10 +52,10 @@ POST localhost:8080/api/auth/login
 content-type: application/json
 
 {
-    "email": "t",
+    "email": "pp",
     "password": "password"
 }
 
 ###
 GET localhost:8080/logged/user
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0IiwiaWF0IjoxNjgzNzQ3MzU4LCJleHAiOjE2ODM3ODMzNTh9.qve_GU8ZBExGWXb8NcoEdt59CJVcP85tBQkFwZmhcmc
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwcCIsImlhdCI6MTY4Mzc1MTcyNSwiZXhwIjoxNjgzNzg3NzI1fQ.oY9ZSe2gUuZpwqnYLZiGV-UQlhbV9FLFOQNgoNH2Vzw

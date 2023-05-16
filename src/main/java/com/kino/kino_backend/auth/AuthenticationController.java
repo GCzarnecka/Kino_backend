@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.*;
 public class AuthenticationController {
 
     private final AuthenticationService authenticationService;
-    @PostMapping("/api/auth/login")
-    public ResponseEntity<AuthenticationResponse> login(
+    @PostMapping("/api/auth/login")//AuthenticationResponse
+    public ResponseEntity<Object> login(
             @RequestBody AuthenticationRequest authenticationRequest
     )
     {

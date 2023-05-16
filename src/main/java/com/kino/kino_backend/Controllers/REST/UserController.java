@@ -19,12 +19,16 @@ public class UserController {
     private UserRepository userRepository;
 
     @GetMapping("/user")
-    public Optional<User> example() {
+    public Optional<User> user() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String email = authentication.getName();
         return userRepository.findByEmail(email);
     }
 
 
+//    @GetMapping("/history")
+//    public Optional<User> history() {
+//
+//    }
 
 }

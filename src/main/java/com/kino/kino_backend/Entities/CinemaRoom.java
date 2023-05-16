@@ -3,7 +3,7 @@ package com.kino.kino_backend.Entities;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.List;
+
 
 @Entity
 @Table(name = "cinema_rooms")
@@ -14,17 +14,6 @@ public class CinemaRoom {
     private int id;
 
     String name;
-    @OneToMany//(mappedBy = "seats")
-    private List<Seat> seats;
-
-
-//    @OneToMany//(mappedBy = "screenings")
-//    private List<Screening> screenings;
-
-//    @OneToOne//(mappedBy = "movies")
-//    private Movie movie;
-//
-
-       private int rowsNumber;
-       private int columnsNumber;
+    private int rowsNumber;
+    private int columnsNumber;
 }

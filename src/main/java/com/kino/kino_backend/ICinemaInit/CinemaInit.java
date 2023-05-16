@@ -83,12 +83,11 @@ public class CinemaInit implements ICinemaInit{
                     Seat seat = new Seat();
                     seat.setSectorNumber(i);
                     seat.setSeatNumber(j);
-                    seat.setCinemaRoom(cinemaRoom);
                     seatRepository.save(seat);
                     seats.add(seat);
                 }
             }
-            cinemaRoom.setSeats(seats);
+//            cinemaRoom.setSeats(seats);
             cinemaRoom.setName(room);
             cinemaRoom.setRowsNumber(10);
             cinemaRoom.setColumnsNumber(10);
@@ -232,23 +231,25 @@ public class CinemaInit implements ICinemaInit{
 
     @Override
     public void initScreenings() {
-
         CinemaRoom cr = cinemaRoomRepository.findByName("Room 1");
         for(Movie m : movieRepository.findAll()){
+
+            ArrayList<Seat> seats = new ArrayList<>();
+
+            for(int i = 0; i < 5; i++)
+                for(int j = 0; j < 5; j++) {
+                    var seat = new Seat(i, j, false);
+                    seats.add(seat);
+                    seatRepository.save(seat);
+                }
+
                 Screening screening = new Screening();
                 screening.setMovie(m);
-//                screening.setCinemaRoom(cr);
-                screening.setStartDateTime(getRandomLocalDateTime());
+                screening.setCinemaRoom(cr);
+                screening.setSeats(seats);
+                screening.setStartDateTime(LocalDateTime.parse("2023-05-18T12:00:00"));
                 screeningRepository.save(screening);
         }
-//        for(int i =0;i<5;i++){
-//            Screening screening = new Screening();
-//            screening.setMovie(movieRepository.findByTitle("The Lord of the Rings: The Return of the King"));
-//            screening.setCinemaRoom(cinemaRoomRepository.findByName("Room "+i+1));
-//            screening.setStartDateTime(LocalDateTime.parse("2020-12-12T12:00:00"));
-//
-//            screeningRepository.save(screening);
-//        }
     }
 
     @Override
