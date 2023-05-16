@@ -236,8 +236,8 @@ public class CinemaInit implements ICinemaInit{
 
             ArrayList<Seat> seats = new ArrayList<>();
 
-            for(int i = 0; i < 5; i++)
-                for(int j = 0; j < 5; j++) {
+            for(int i = 0; i < cr.getRowsNumber(); i++)
+                for(int j = 0; j < cr.getColumnsNumber(); j++) {
                     var seat = new Seat(i, j, false);
                     seats.add(seat);
                     seatRepository.save(seat);
