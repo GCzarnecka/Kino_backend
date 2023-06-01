@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -17,6 +19,9 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api")
 public class CinemaController {
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Autowired
     private MovieRepository movieRepository;
@@ -75,12 +80,22 @@ public class CinemaController {
 //    }
     @RequestMapping(method = RequestMethod.POST, value = "/movies")
     public Movie createMovie( @RequestBody Movie movie) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String email = authentication.getName();
+        Optional<User> userOpt = userRepository.findByEmail(email);
+        if (userOpt.isEmpty()) {
+            throw new RuntimeException("User not found");
+        }
+        if (!userOpt.get().getRole().equals(Role.ADMIN)) {
+            throw new RuntimeException("User has no permissions!");
+        }
+
         return movieRepository.save(movie);
     }
-    @RequestMapping(method = RequestMethod.POST, value = "/movies/{id}")
-    public Movie editMovie( @RequestBody Movie movie) {
-        return movieRepository.save(movie);
-    }
+//    @RequestMapping(method = RequestMethod.POST, value = "/movies/{id}")
+//    public Movie editMovie( @RequestBody Movie movie) {
+//        return movieRepository.save(movie);
+//    }
 
 
     //--------------------MOVIES--------------------

@@ -1,13 +1,17 @@
 package com.kino.kino_backend.Entities;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Entity
 @Table(name = "authors")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Author {
 
     @Id
@@ -16,12 +20,18 @@ public class Author {
 
     private String name;
 
-    private String surname;
+//    private String surname;
 
     private int age;
 
 //    @OneToMany//(mappedBy = "movies")
 //    private List<Movie> movies;
+    public Author(String name, int age) {
+        this.name = name;
+//        this.surname = surname;
+        this.age = age;
+    }
+
 
     public int getId() {
         return id;
@@ -39,13 +49,13 @@ public class Author {
         this.name = name;
     }
 
-    public String getSurname() {
-        return surname;
-    }
+//    public String getSurname() {
+//        return surname;
+//    }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
+//    public void setSurname(String surname) {
+//        this.surname = surname;
+//    }
 
     public int getAge() {
         return age;

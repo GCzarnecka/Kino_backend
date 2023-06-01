@@ -35,6 +35,7 @@ public class Movie {
     @ManyToOne
     private Author author;
 
+    @Column(length = 5000)
     private String poster;
     public Movie() {
     }
