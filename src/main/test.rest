@@ -64,3 +64,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJnb3NpYXh4eEBnbWFpbC5jb20iL
 
 ###
 GET localhost:8080/logged/place-order
+
+###
+
+GET localhost:8080/api/authors

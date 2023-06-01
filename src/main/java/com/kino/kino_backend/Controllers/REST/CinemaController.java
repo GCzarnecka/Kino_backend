@@ -56,8 +56,29 @@ public class CinemaController {
     }
 
 
-    @RequestMapping(method = RequestMethod.POST, value = "/movies/{id}")
+    @GetMapping("/categories")
+    @ResponseBody
+    public List<Category> getAllCategories() {
+        return  categoryRepository.findAll();
+    }
+
+    @GetMapping("/authors")
+    @ResponseBody
+    public List<Author> getAllAuthors() {
+        return  authorRepository.findAll();
+    }
+
+
+//    @RequestMapping(method = RequestMethod.POST, value = "/movies/{id}")
+//    public Movie createMovie( @RequestBody Movie movie) {
+//        return movieRepository.save(movie);
+//    }
+    @RequestMapping(method = RequestMethod.POST, value = "/movies")
     public Movie createMovie( @RequestBody Movie movie) {
+        return movieRepository.save(movie);
+    }
+    @RequestMapping(method = RequestMethod.POST, value = "/movies/{id}")
+    public Movie editMovie( @RequestBody Movie movie) {
         return movieRepository.save(movie);
     }
 
