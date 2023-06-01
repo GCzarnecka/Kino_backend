@@ -77,19 +77,19 @@ public class CinemaInit implements ICinemaInit{
         Stream.of("Room 1", "Room 2", "Room 3", "Room 4", "Room 5").forEach(room -> {
             CinemaRoom cinemaRoom = new CinemaRoom();
             cinemaRoom.setName(room);
-            List<Seat> seats = new ArrayList<>();
-            for(int i =0;i<10;i++){
-                for(int j =0;j<10;j++){
-                    Seat seat = new Seat();
-                    seat.setSectorNumber(i);
-                    seat.setSeatNumber(j);
-                    seatRepository.save(seat);
-                    seats.add(seat);
-                }
-            }
-//            cinemaRoom.setSeats(seats);
+//            List<Seat> seats = new ArrayList<>();
+//            for(int i =0;i<10;i++){
+//                for(int j =0;j<10;j++){
+//                    Seat seat = new Seat();
+//                    seat.setSectorNumber(i);
+//                    seat.setSeatNumber(j);
+//                    seatRepository.save(seat);
+//                    seats.add(seat);
+//                }
+//             }
+//           cinemaRoom.setSeats(seats);
             cinemaRoom.setName(room);
-            cinemaRoom.setRowsNumber(10);
+            cinemaRoom.setRowsNumber(6);
             cinemaRoom.setColumnsNumber(10);
 
 //            cinemaRoom.setScreenings();
@@ -247,7 +247,7 @@ public class CinemaInit implements ICinemaInit{
                 screening.setMovie(m);
                 screening.setCinemaRoom(cr);
                 screening.setSeats(seats);
-                screening.setStartDateTime(LocalDateTime.parse("2023-05-18T12:00:00"));
+                screening.setStartDateTime(LocalDateTime.parse("2023-06-03T12:00:00"));
                 screeningRepository.save(screening);
         }
     }

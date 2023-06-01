@@ -2,13 +2,19 @@ package com.kino.kino_backend.Entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
 @Table(name = "reservations")
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
 public class Reservation {
 
@@ -23,21 +29,25 @@ public class Reservation {
 //    @OneToMany//(mappedBy = "messageComplaints")
 //    private List<MessageComplaint> messageComplaint;
 
-    @ManyToOne
+//    @ManyToOne(cascade = CascadeType.ALL)
 //    @JoinColumn(name = "user_id")
-    private User user;
+//    private User user;
 
 
 //    @JoinColumn(name = "movie_id")
 //    @ManyToMany//(mappedBy = "movies")
 //    private List<Movie> movies;
 
-    @OneToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Screening screening;
 
-    @OneToMany
+
+
+//    @OneToMany
 //    @JoinColumn(name = "seat_id")
-    private List<Seat> seats;
+//    private List<Seat> seats;
+    @ElementCollection
+    private List<Integer> seatsIds;
 
 //    @Column(name = "reservation_time")
     private LocalDateTime reservationTime;
@@ -60,13 +70,13 @@ public class Reservation {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
+//    public User getUser() {
+//        return user;
+//    }
+//
+//    public void setUser(User user) {
+//        this.user = user;
+//    }
 
     public Screening getScreening() {
         return screening;
@@ -76,12 +86,12 @@ public class Reservation {
         this.screening = screening;
     }
 
-    public List<Seat> getSeats() {
-        return seats;
+    public List<Integer> getSeatsIds() {
+        return seatsIds;
     }
 
-    public void setSeats(List<Seat> seats) {
-        this.seats = seats;
+    public void setSeatsIds(List<Integer> seats) {
+        this.seatsIds = seats;
     }
 
     public LocalDateTime getReservationTime() {

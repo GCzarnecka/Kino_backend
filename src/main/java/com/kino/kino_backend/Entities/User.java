@@ -33,7 +33,7 @@ public class User implements UserDetails {
 
         private int age;
 
-        @OneToMany//(mappedBy = "movies")
+        @OneToMany(cascade = CascadeType.ALL)
         private List<Reservation> reservations;
 
         @OneToMany//(mappedBy = "movies")

@@ -23,7 +23,7 @@ public class SecurityConfiguration {
                 .disable()
                 .authorizeHttpRequests()
 //                        .requestMatchers(request -> request.getServletPath().startsWith("/api/"))
-                        .requestMatchers("/api/**")
+                        .requestMatchers("/**")
                         .permitAll()
                         .anyRequest()
                         .authenticated()

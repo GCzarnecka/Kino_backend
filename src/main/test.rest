@@ -58,4 +58,9 @@ content-type: application/json
 
 ###
 GET localhost:8080/logged/user
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwcCIsImlhdCI6MTY4Mzc1MTcyNSwiZXhwIjoxNjgzNzg3NzI1fQ.oY9ZSe2gUuZpwqnYLZiGV-UQlhbV9FLFOQNgoNH2Vzw
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJnb3NpYXh4eEBnbWFpbC5jb20iLCJpYXQiOjE2ODQ5NTc3NDEsImV4cCI6MTY4NDk5Mzc0MX0.jKK1Ap7hSv-F91VtZKp9MfR8OnI6EbXm6ZXdknlyY5c
+
+
+
+###
+GET localhost:8080/logged/place-order

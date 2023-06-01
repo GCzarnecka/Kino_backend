@@ -24,10 +24,12 @@ public class Screening {
     @ManyToOne
     private CinemaRoom cinemaRoom;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Seat> seats;
 
     private LocalDateTime startTime;
+
+    private double price;
 
     public Screening(Movie movie, CinemaRoom cinemaRoom, LocalDateTime date, List<Seat> seats) {
         this.movie = movie;
