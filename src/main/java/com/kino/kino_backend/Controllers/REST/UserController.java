@@ -83,6 +83,36 @@ public class UserController {
         return userRepository.findByEmail(email);
     }
 
+
+    @PostMapping("reservation")
+    public void reservation(@RequestBody Reservation reservation) {
+        checkReservationUser(reservation);
+        reservationRepository.save(reservation);
+    }
+
+    @DeleteMapping("reservation/{id}")
+    public void deleteReservation(@PathVariable Long id) {
+        var reservation = reservationRepository.findById(id).orElseThrow(() -> new RuntimeException("Reservation not found"));
+        var user = checkReservationUser(reservation);
+        user.setReservations(user.getReservations().stream().filter(res -> res.getId() != id).toList());
+        reservationRepository.delete(reservation);
+        userRepository.save(user);
+    }
+
+
+    private User checkReservationUser(@RequestBody Reservation reservation) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String email = authentication.getName();
+        Optional<User> userOpt = userRepository.findByEmail(email);
+        if (userOpt.isEmpty()) {
+            throw new RuntimeException("User not found");
+        }
+        if(!userOpt.get().getReservations().stream().anyMatch(res -> res.getId() == reservation.getId())) {
+            throw new RuntimeException("Reservation does not belong to user!");
+        }
+        return userOpt.get();
+    }
+
 //    @GetMapping("/history")
 //    public Optional<User> history() {
 //
