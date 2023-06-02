@@ -67,6 +67,12 @@ public class CinemaController {
         return  categoryRepository.findAll();
     }
 
+    @GetMapping("/rooms")
+    @ResponseBody
+    public List<CinemaRoom> getAllRooms() {
+        return  cinemaRoomRepository.findAll();
+    }
+
     @GetMapping("/authors")
     @ResponseBody
     public List<Author> getAllAuthors() {
@@ -98,7 +104,6 @@ public class CinemaController {
 //    }
 
 
-    //--------------------MOVIES--------------------
     @GetMapping( value="/screenings")
     @ResponseBody
         public List<Screening> getScreeningByMovieId( @RequestParam long movieId) {
@@ -106,5 +111,19 @@ public class CinemaController {
                     new ResourceNotFoundException("Movie not found with id: " + movieId));
             return screeningRepository.findByMovie(movie);
         }
+
+    @PostMapping("/screenings")
+    public Screening createScreening(@RequestBody Screening screening) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String email = authentication.getName();
+        Optional<User> userOpt = userRepository.findByEmail(email);
+        if (userOpt.isEmpty()) {
+            throw new RuntimeException("User not found");
+        }
+        if (!userOpt.get().getRole().equals(Role.ADMIN)) {
+            throw new RuntimeException("User has no permissions!");
+        }
+        return screeningRepository.save(screening);
+    }
 
 }
