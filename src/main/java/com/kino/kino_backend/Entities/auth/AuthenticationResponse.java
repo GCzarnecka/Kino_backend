@@ -1,4 +1,4 @@
-package com.kino.kino_backend.auth;
+package com.kino.kino_backend.Entities.auth;
 
 import lombok.*;
 

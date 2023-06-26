@@ -1,9 +1,12 @@
-package com.kino.kino_backend.auth;
+package com.kino.kino_backend.Service;
 
 import com.kino.kino_backend.Configuration.JwtService;
 import com.kino.kino_backend.Entities.Role;
 import com.kino.kino_backend.Entities.User;
 import com.kino.kino_backend.Repositories.UserRepository;
+import com.kino.kino_backend.Entities.auth.AuthenticationRequest;
+import com.kino.kino_backend.Entities.auth.AuthenticationResponse;
+import com.kino.kino_backend.Entities.auth.RegisterRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

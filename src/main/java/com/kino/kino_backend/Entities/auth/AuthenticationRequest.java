@@ -1,4 +1,4 @@
-package com.kino.kino_backend.auth;
+package com.kino.kino_backend.Entities.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class RegisterResponse {
-    private String token;
+public class AuthenticationRequest {
+    private String email;
+    private String password;
 }

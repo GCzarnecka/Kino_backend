@@ -1,5 +1,8 @@
-package com.kino.kino_backend.auth;
+package com.kino.kino_backend.Controllers.REST;
 
+import com.kino.kino_backend.Entities.auth.AuthenticationRequest;
+import com.kino.kino_backend.Service.AuthenticationService;
+import com.kino.kino_backend.Entities.auth.RegisterRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,11 +30,6 @@ public class AuthenticationController {
             return ResponseEntity.badRequest().body("User with provided email already exists!");
         return ResponseEntity.ok(resp);
     }
-
-//    @GetMapping("logged/refreshToken")
-//    public ResponseEntity<Object> refreshToken(){
-//        return
-//    }
 
 
 }
