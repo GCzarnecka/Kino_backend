@@ -10,8 +10,10 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
-public interface ScreeningRepository extends JpaRepository<Screening, Long> {
-    List<Screening> findByMovie(Movie movie);
+public interface ScreeningRepository extends JpaRepository<Screening, Integer> {
+//    List<Screening> findByMovie(Movie movie);
+
+    List<Screening> findByMovieId(Integer movieId);
 
 //    List<Screening> findByMovieAndStartTimeBetween(Movie movie, LocalDateTime startTime, LocalDateTime endTime);
 //    List<Screening> findByStartTimeBetween(LocalDateTime startTime, LocalDateTime endTime);

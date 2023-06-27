@@ -10,8 +10,12 @@ import com.kino.kino_backend.Entities.auth.RegisterRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -57,5 +61,18 @@ public class AuthenticationService {
                 .token(jwt)
                 .build();
 
+    }
+
+    public User checkPermissions() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String email = authentication.getName();
+        Optional<User> userOpt = userRepository.findByEmail(email);
+        if (userOpt.isEmpty()) {
+            throw new RuntimeException("User not found");
+        }
+        if (!userOpt.get().getRole().equals(Role.ADMIN)) {
+            throw new RuntimeException("User has no permissions!");
+        }
+        return userOpt.get();
     }
 }

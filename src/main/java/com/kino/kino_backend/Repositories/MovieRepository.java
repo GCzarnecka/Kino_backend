@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Repository
-public interface MovieRepository extends JpaRepository<Movie, Long> {
+public interface MovieRepository extends JpaRepository<Movie, Integer> {
     Movie findByTitle(String s);
 //    List<Movie> findAll();
 //    Movie findById(int id);//moze jednak long?

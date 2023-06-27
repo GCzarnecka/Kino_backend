@@ -14,7 +14,7 @@ class CinemaControllerTest {
 
     @Test
     void getMovie() {
-        var movie = cinemaController.getMovie(1l);
+        var movie = cinemaController.getMovie(1);
         assertNotEquals (movie, null);
     }
 
