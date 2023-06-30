@@ -1,3 +1,7 @@
+/**
+
+ Service class for user authentication and registration.
+ */
 package com.kino.kino_backend.Service;
 
 import com.kino.kino_backend.Configuration.JwtService;
@@ -24,6 +28,13 @@ public class AuthenticationService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
+
+    /**
+     * Registers a new user with the provided registration information.
+     *
+     * @param registerRequest the registration request containing user information
+     * @return the authentication response containing a token
+     */
     public AuthenticationResponse register(RegisterRequest registerRequest) {
         var user = User.builder()
                 .email(registerRequest.getEmail())
@@ -46,6 +57,12 @@ public class AuthenticationService {
     }
     private final AuthenticationManager authenticationManager;
 
+    /**
+     * Authenticates a user with the provided login credentials.
+     *
+     * @param authenticationRequest the authentication request containing login credentials
+     * @return the authentication response containing a token
+     */
     public AuthenticationResponse login(AuthenticationRequest authenticationRequest) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
@@ -63,6 +80,12 @@ public class AuthenticationService {
 
     }
 
+    /**
+     * Checks the permissions of the currently authenticated user.
+     *
+     * @return the User object representing the authenticated user with ADMIN role
+     * @throws RuntimeException if the user is not found or has no permissions
+     */
     public User checkPermissions() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String email = authentication.getName();

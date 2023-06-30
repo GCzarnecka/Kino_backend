@@ -1,3 +1,7 @@
+/**
+
+ Represents a user entity.
+ */
 package com.kino.kino_backend.Entities;
 
 
@@ -39,26 +43,59 @@ public class User implements UserDetails {
         @OneToMany//(mappedBy = "movies")
         private List<MessageComplaint> messageComplaints;
 
+
+        /**
+         * Returns the ID of the user.
+         *
+         * @return the ID of the user
+         */
         public int getId() {
                 return id;
         }
 
+        /**
+         * Sets the ID of the user.
+         *
+         * @param id the ID of the user
+         */
         public void setId(int id) {
                 this.id = id;
         }
 
+        /**
+         * Returns the name of the user.
+         *
+         * @return the name of the user
+         */
         public String getName() {
                 return name;
         }
 
+
+        /**
+         * Sets the name of the user.
+         *
+         * @param name the name of the user
+         */
         public void setName(String name) {
                 this.name = name;
         }
 
+        /**
+         * Returns the email of the user.
+         *
+         * @return the email of the user
+         */
         public String getEmail() {
                 return email;
         }
 
+
+        /**
+         * Sets the email of the user.
+         *
+         * @param email the email of the user
+         */
         public void setEmail(String email) {
                 this.email = email;
         }
@@ -69,36 +106,27 @@ public class User implements UserDetails {
         public Collection<? extends GrantedAuthority> getAuthorities() {
                 return List.of(new SimpleGrantedAuthority(role.name()));
         }
+
+        /**
+         * Returns the password of the user.
+         *
+         * @return the password of the user
+         */
         @Override
         public String getPassword() {
                 return password;
         }
 
+
+        /**
+         * Returns the surname of the user.
+         *
+         * @return the surname of the user
+         */
         @Override
         public String getUsername() {
                 return email;
         }
-
-        public void setPassword(String password) {
-                this.password = password;
-        }
-
-        public String getSurname() {
-                return surname;
-        }
-
-        public void setSurname(String surname) {
-                this.surname = surname;
-        }
-
-        public int getAge() {
-                return age;
-        }
-
-        public void setAge(int age) {
-                this.age = age;
-        }
-
 
         @Override
         public boolean isAccountNonExpired() {

@@ -1,3 +1,7 @@
+/**
+
+ Represents a registration response containing a token.
+ */
 package com.kino.kino_backend.Entities.auth;
 
 import lombok.AllArgsConstructor;
@@ -10,5 +14,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RegisterResponse {
+    /**
+     * The registration token.
+     */
     private String token;
 }

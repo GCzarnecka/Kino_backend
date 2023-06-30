@@ -6,10 +6,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.Month;
-import java.time.ZoneOffset;
+import java.time.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -55,16 +52,6 @@ public class CinemaInit implements ICinemaInit{
 
     @Override
     public void initAuthors() {
-//        Chad Stahelski
-//        Andrew Adamson
-//        Frank Darabont
-//        Francis Ford Coppola
-//        Christopher Nolan
-//        Peter Jackson
-//        Quentin Tarantino
-//        Alejandro G. Iñárritu
-//        Steven Spielberg
-
         Author author1 = new Author("Chad Stahelski", 54);
         Author author2 = new Author("Andrew Adamson", 56);
         Author author3 = new Author("Frank Darabont", 62);
@@ -93,33 +80,15 @@ public class CinemaInit implements ICinemaInit{
         Stream.of("Room 1", "Room 2", "Room 3", "Room 4", "Room 5").forEach(room -> {
             CinemaRoom cinemaRoom = new CinemaRoom();
             cinemaRoom.setName(room);
-//            List<Seat> seats = new ArrayList<>();
-//            for(int i =0;i<10;i++){
-//                for(int j =0;j<10;j++){
-//                    Seat seat = new Seat();
-//                    seat.setSectorNumber(i);
-//                    seat.setSeatNumber(j);
-//                    seatRepository.save(seat);
-//                    seats.add(seat);
-//                }
-//             }
-//           cinemaRoom.setSeats(seats);
             cinemaRoom.setName(room);
             cinemaRoom.setRowsNumber(6);
             cinemaRoom.setColumnsNumber(10);
-
-//            cinemaRoom.setScreenings();
-
 
             cinemaRoomRepository.save(cinemaRoom);
         });
 
     }
 
-//    @Override
-//    public void initMessageComplaints() {
-//
-//    }
 
     @Override
     public void initMovies() {
@@ -467,33 +436,39 @@ public class CinemaInit implements ICinemaInit{
 //        reservationRepository.save(new Reservation(){});
     }
 
-    private static LocalDateTime getRandomLocalDateTime(){
-        long minDay = LocalDateTime.of(2020, Month.DECEMBER, 1, 0, 0).toEpochSecond(ZoneOffset.UTC);
-        long maxDay = LocalDateTime.of(2020, Month.DECEMBER, 31, 23, 59).toEpochSecond(ZoneOffset.UTC);
-        long randomDay = ThreadLocalRandom.current().nextLong(minDay, maxDay);
-        return LocalDateTime.ofEpochSecond(randomDay, 0, ZoneOffset.UTC);
-    }
 
     @Override
     public void initScreenings() {
         CinemaRoom cr = cinemaRoomRepository.findByName("Room 1");
         for(Movie m : movieRepository.findAll()){
 
-            ArrayList<Seat> seats = new ArrayList<>();
+                for(int days = 0; days < 7; days++)
+                {
 
-            for(int i = 0; i < cr.getRowsNumber(); i++)
-                for(int j = 0; j < cr.getColumnsNumber(); j++) {
-                    var seat = new Seat(i, j, false);
-                    seats.add(seat);
-                    seatRepository.save(seat);
+                    for( int hour = 0; hour < 5; hour++)
+                    {
+                        // get random number between 1 and 59
+                        int minute = ThreadLocalRandom.current().nextInt(0, 59 + 1);
+
+                        //get random number between 10 and 15
+                        int hourStart = ThreadLocalRandom.current().nextInt(10, 15 + 1);
+                        ArrayList<Seat> seats = new ArrayList<>();
+
+                        for(int i = 0; i < cr.getRowsNumber(); i++)
+                            for(int j = 0; j < cr.getColumnsNumber(); j++) {
+                                var seat = new Seat(i, j, false);
+                                seats.add(seat);
+                                seatRepository.save(seat);
+                            }
+                        Screening screening = new Screening();
+                        screening.setMovie(m);
+                        screening.setCinemaRoom(cr);
+                        screening.setSeats(seats);
+                        screening.setStartDateTime(LocalDateTime.now().plusDays(days).withHour(hourStart + hour).withMinute(minute));
+                        screeningRepository.save(screening);
+                    }
+
                 }
-
-                Screening screening = new Screening();
-                screening.setMovie(m);
-                screening.setCinemaRoom(cr);
-                screening.setSeats(seats);
-                screening.setStartDateTime(LocalDateTime.parse("2023-06-03T12:00:00"));
-                screeningRepository.save(screening);
         }
     }
 
@@ -505,21 +480,14 @@ public class CinemaInit implements ICinemaInit{
 
     @Override
     public void initUsers() {
-//        User user1 = new User();
-//        user1.setName("Gosia");
-//        user1.setSurname("Jakas");
-//        user1.setEmail("gosia@mail.pl");
-//        user1.setPassword("1234");
-//        user1.setAge(18);
-//        userRepository.save(user1);
-//
-//        User user2 = new User();
-//        user2.setName("Konrad");
-//        user2.setSurname("Jakis");
-//        user2.setEmail("konrad@mail.pl");
-//        user2.setPassword("1234");
-//        user2.setAge(18);
-//        user2.setAdmin(true);
-//        userRepository.save(user2);
+
+        User user = new User();
+        user.setName("Admin");
+        user.setSurname("Admin");
+        user.setEmail("admin@admin.pl");
+        user.setPassword("$2a$10$QndQWVzW0STfCZw023HhqOXPtC18asjeZ5eSQMgZzzcd2p95TmWMC");
+        user.setAge(18);
+        user.setRole(Role.ADMIN);
+        userRepository.save(user);
     }
 }

@@ -1,3 +1,8 @@
+/**
+
+ The ApplicationConfig class provides configuration for the application.
+ It defines beans for user authentication and password encoding.
+ */
 package com.kino.kino_backend.Configuration;
 
 import com.kino.kino_backend.Repositories.UserRepository;
@@ -19,6 +24,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @RequiredArgsConstructor
 public class ApplicationConfig {
     private final UserRepository repository;
+    /**
+     * Creates a UserDetailsService bean.
+     *
+     * @return An implementation of UserDetailsService.
+     */
     @Bean
     public UserDetailsService userDetailsService(){
         //TODO: godizna 1:21 slabo dzila
@@ -32,7 +42,11 @@ public class ApplicationConfig {
         };
 
     }
-
+    /**
+     * Creates an AuthenticationProvider bean.
+     *
+     * @return An implementation of AuthenticationProvider.
+     */
     @Bean
     public AuthenticationProvider authenticationProvider(){
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
@@ -41,11 +55,25 @@ public class ApplicationConfig {
         return provider;
     }
 
+
+    /**
+     * Creates an AuthenticationManager bean.
+     *
+     * @param configuration The AuthenticationConfiguration object.
+     * @return An implementation of AuthenticationManager.
+     * @throws Exception If an error occurs while retrieving the AuthenticationManager.
+     */
     @Bean
     public AuthenticationManager authenticationManager(
             AuthenticationConfiguration configuration) throws Exception {
         return configuration.getAuthenticationManager();
     }
+
+    /**
+     * Creates a PasswordEncoder bean.
+     *
+     * @return An implementation of PasswordEncoder.
+     */
 @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();

@@ -1,3 +1,9 @@
+/**
+
+ The JWTAuthenticationFilter class is a filter that handles authentication using JWT (JSON Web Token).
+ It intercepts incoming requests and checks for a valid JWT in the Authorization header.
+ If a valid JWT is found, it authenticates the user and sets the authentication in the SecurityContextHolder.
+ */
 package com.kino.kino_backend.Configuration;
 
 import jakarta.servlet.FilterChain;
@@ -22,6 +28,16 @@ import java.io.IOException;
 public class JWTAuthenticationFilter extends OncePerRequestFilter {
     private final JwtService jwtService;
     private final UserDetailsService userDetailsService;
+
+    /**
+     * Filters the incoming requests and performs JWT authentication.
+     *
+     * @param request     The HttpServletRequest object.
+     * @param response    The HttpServletResponse object.
+     * @param filterChain The FilterChain object.
+     * @throws ServletException If an exception occurs during filtering.
+     * @throws IOException      If an I/O error occurs during filtering.
+     */
     @Override
     protected void doFilterInternal(
             @NonNull HttpServletRequest request,

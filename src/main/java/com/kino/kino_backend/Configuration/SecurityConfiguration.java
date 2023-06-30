@@ -1,3 +1,7 @@
+/**
+
+ Configuration class for security settings and filters.
+ */
 package com.kino.kino_backend.Configuration;
 
 import jakarta.servlet.Filter;
@@ -16,6 +20,13 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @AllArgsConstructor
 public class SecurityConfiguration {
 
+    /**
+     * Configures the security filter chain for the HTTP requests.
+     *
+     * @param http the HttpSecurity object used for configuring security
+     * @return the configured SecurityFilterChain object
+     * @throws Exception if an exception occurs during configuration
+     */
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
                 http

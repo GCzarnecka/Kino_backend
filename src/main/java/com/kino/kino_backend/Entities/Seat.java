@@ -1,3 +1,7 @@
+/**
+
+ Represents a seat in a cinema room.
+ */
 package com.kino.kino_backend.Entities;
 
 import jakarta.persistence.*;
@@ -19,49 +23,57 @@ public class Seat {
 
     private boolean isTaken;
 
-    public Seat(int i, int i1, CinemaRoom cinemaRoom) {
-        this.sectorNumber = i;
-        this.seatNumber = i1;
-    }
-
+    /**
+     * Default constructor for Seat class.
+     */
     public Seat() {
-
     }
 
-    public Seat(int i, int j, boolean b) {
-        this.sectorNumber = i;
-        this.seatNumber = j;
-        this.isTaken = b;
+    /**
+     * Constructs a Seat object with the specified sector number and seat number.
+     *
+     * @param sector the sector number of the seat
+     * @param seatNr   the seat number
+     * @param isTaken      the seat number
+     */
+    public Seat(int sector, int seatNr, boolean isTaken) {
+        this.sectorNumber = sector;
+        this.seatNumber = seatNr;
+        this.isTaken = isTaken;
     }
 
+    /**
+     * Returns the ID of the seat.
+     *
+     * @return the ID of the seat
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * Sets the ID of the seat.
+     *
+     * @param id the ID of the seat
+     */
     public void setId(int id) {
         this.id = id;
     }
 
-    public int getSectorNumber() {
-        return sectorNumber;
-    }
 
-    public void setSectorNumber(int rowNumber) {
-        this.sectorNumber = rowNumber;
-    }
-
-    public int getSeatNumber() {
-        return seatNumber;
-    }
-
-    public void setSeatNumber(int seatNumber) {
-        this.seatNumber = seatNumber;
-    }
-
+    /**
+     * Returns the taken status of the seat.
+     *
+     * @return the taken status of the seat
+     */
     public boolean isTaken() {
         return isTaken;
     }
-
+    /**
+     * Sets the taken status of the seat.
+     *
+     * @param taken the taken status of the seat
+     */
     public void setTaken(boolean taken) {
         isTaken = taken;
     }

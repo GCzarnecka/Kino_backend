@@ -1,3 +1,7 @@
+/**
+
+ Entity class representing an author.
+ */
 package com.kino.kino_backend.Entities;
 
 import jakarta.persistence.*;
@@ -20,56 +24,73 @@ public class Author {
 
     private String name;
 
-//    private String surname;
 
     private int age;
 
-//    @OneToMany//(mappedBy = "movies")
-//    private List<Movie> movies;
+
+    /**
+     * Constructs a new Author object with the specified name and age.
+     *
+     * @param name the name of the author
+     * @param age  the age of the author
+     */
     public Author(String name, int age) {
         this.name = name;
-//        this.surname = surname;
         this.age = age;
     }
 
-
+    /**
+     * Retrieves the ID of the author.
+     *
+     * @return the ID of the author
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * Sets the ID of the author.
+     *
+     * @param id the ID to be set
+     */
     public void setId(int id) {
         this.id = id;
     }
 
+    /**
+     * Retrieves the name of the author.
+     *
+     * @return the name of the author
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Sets the name of the author.
+     *
+     * @param name the name to be set
+     */
     public void setName(String name) {
         this.name = name;
     }
 
-//    public String getSurname() {
-//        return surname;
-//    }
-
-//    public void setSurname(String surname) {
-//        this.surname = surname;
-//    }
-
+    /**
+     * Retrieves the age of the author.
+     *
+     * @return the age of the author
+     */
     public int getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    /**
+     * Sets the age of the author.
+     *
+     * @param age the age to be set
+     */
+    public void setAge(int age)  {
         this.age = age;
     }
 
-//    public List<Movie> getMovies() {
-//        return movies;
-//    }
-//
-//    public void setMovies(List<Movie> movies) {
-//        this.movies = movies;
-//    }
 }

@@ -1,11 +1,12 @@
+/**
+
+ Entity class representing a movie.
+ */
 package com.kino.kino_backend.Entities;
 
 
 import jakarta.persistence.*;
 import lombok.Data;
-
-import java.util.Date;
-import java.util.List;
 
 @Entity
 @Table(name = "movies")
@@ -16,25 +17,52 @@ public class Movie {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
+    /**
+     * The title of the movie.
+     */
     private String title;
 
+    /**
+     * The category of the movie.
+     */
     @ManyToOne
     private Category category;
 
+
+    /**
+     * The production date of the movie.
+     */
     @Temporal(TemporalType.DATE)
     private int productionDate;
 
+
+    /**
+     * The age restriction of the movie.
+     */
     private int ageRestriction;
 
+
+    /**
+     * The duration of the movie in minutes.
+     */
     private int duration;
 
+
+    /**
+     * The description of the movie.
+     */
     @Column(length = 5000)
     private String description;
 
-
+    /**
+     * The author of the movie.
+     */
     @ManyToOne
     private Author author;
 
+    /**
+     * The URL of the movie poster.
+     */
     @Column(length = 5000)
     private String poster;
     public Movie() {
@@ -52,64 +80,39 @@ public class Movie {
         this.poster = poster;
         this.description = description;
     }
-
-//    public Movie(String s, String s1, String url, int i, int i1, int i2) {
-//    }
-
+    /**
+     * Retrieves the id of the movie.
+     *
+     * @return the id of the movie
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * Sets the id of the movie.
+     *
+     * @param id the id to be set
+     */
     public void setId(int id) {
         this.id = id;
     }
 
+    /**
+     * Retrieves the title of the movie.
+     * @return the title of the movie
+     */
     public String getTitle() {
         return title;
     }
-
+    /**
+     * Sets the title of the movie.
+     *
+     * @param title the title to be set
+     */
     public void setTitle(String title) {
         this.title = title;
     }
 
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
-    public int getProductionDate() {
-        return productionDate;
-    }
-
-    public void setProductionDate(int productionDate) {
-        this.productionDate = productionDate;
-    }
-
-    public int getAgeRestriction() {
-        return ageRestriction;
-    }
-
-    public void setAgeRestriction(int ageRestriction) {
-        this.ageRestriction = ageRestriction;
-    }
-
-    public int getDuration() {
-        return duration;
-    }
-
-    public void setDuration(int duration) {
-        this.duration = duration;
-    }
-
-    public Author getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(Author author) {
-        this.author = author;
-    }
 }
 
